@@ -17,7 +17,7 @@ def creat_task():
     task_id_control += 1
     tasks.append(new_task)
     print(tasks)
-    return jsonify({"message": "Nova tarefa criada com sucesso"}) #Faz com que o retorno seja em json para seguir o API Rest
+    return jsonify({"message": "Nova tarefa criada com sucesso", "id": new_task.id}) #Faz com que o retorno seja em json para seguir o API Rest
 
 
 @app.route('/tasks', methods=['GET'])
