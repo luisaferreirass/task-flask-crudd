@@ -194,4 +194,3 @@ Este projeto está sob a licença MIT.
 ## 👩‍💻 Autora
 
 Desenvolvido por [Luisa Ferreira](https://github.com/luisaferreirass)
-```
