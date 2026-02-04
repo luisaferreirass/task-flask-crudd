@@ -1,22 +1,24 @@
-# 📋 Task Flask CRUD
+**# 📋 Task Flask CRUD
 
 ## 📝 Sobre o projeto
 
-API REST de gerenciamento de tarefas (To-Do List) desenvolvida com **Flask** e **SQLAlchemy**. O projeto implementa as operações CRUD (Create, Read, Update, Delete) completas para gerenciar tarefas de forma eficiente através de endpoints REST.
+API REST de gerenciamento de tarefas (To-Do List) desenvolvida com **Flask**. O projeto implementa as operações CRUD (Create, Read, Update, Delete) completas para gerenciar tarefas de forma eficiente através de endpoints REST, utilizando armazenamento em memória.
 
 Ideal para aprendizado de desenvolvimento web com Python, demonstrando conceitos de:
 - Framework Flask
-- ORM com SQLAlchemy
-- Banco de dados SQLite
 - APIs RESTful
 - Operações CRUD
+- Manipulação de dados JSON
+- Rotas e métodos HTTP
+- Testes automatizados com Pytest
 
 ## 🚀 Tecnologias utilizadas
 
 - **Python 3.x**
-- **Flask** - Framework web
-- **Flask-SQLAlchemy** - ORM para banco de dados
-- **SQLite** - Banco de dados
+- **Flask 2.3.0** - Framework web
+- **Werkzeug 2.3.0** - WSGI toolkit
+- **Requests 2.31.0** - HTTP library
+- **Pytest 7.4.3** - Framework de testes
 
 ## ⚙️ Como executar
 
@@ -59,13 +61,24 @@ python app.py
 
 A API estará disponível em: `http://localhost:5000`
 
+### Executando os testes
+```bash
+pytest
+```
+
+ou para ver mais detalhes:
+```bash
+pytest -v
+```
+
 ## 🎯 Funcionalidades
 
 - ✅ **Criar** novas tarefas
 - 📖 **Visualizar** lista de tarefas
+- 🔍 **Buscar** tarefa específica por ID
 - ✏️ **Editar** tarefas existentes
 - 🗑️ **Excluir** tarefas
-- 💾 Persistência de dados com SQLite
+- 🧪 Testes automatizados
 
 ## 🛠️ Modelo de dados
 
@@ -73,10 +86,10 @@ A API estará disponível em: `http://localhost:5000`
 
 | Campo | Tipo | Descrição |
 |-------|------|-----------|
-| id | Integer | Chave primária (auto-incremento) |
-| title | String(100) | Título da tarefa |
-| description | Text | Descrição detalhada |
-| done | Boolean | Status de conclusão (padrão: False) |
+| id | Integer | Identificador único (auto-incremento) |
+| title | String | Título da tarefa |
+| description | String | Descrição detalhada |
+| completed | Boolean | Status de conclusão (padrão: False) |
 
 ## 📸 Endpoints da API
 
@@ -97,14 +110,41 @@ Content-Type: application/json
 
 {
   "title": "Estudar Flask",
-  "description": "Aprender sobre APIs REST com Flask",
-  "done": false
+  "description": "Aprender sobre APIs REST com Flask"
+}
+```
+
+**Resposta:**
+```json
+{
+  "message": "Nova tarefa criada com sucesso",
+  "id": 1
 }
 ```
 
 ### Listar todas as tarefas
 ```bash
 GET /tasks
+```
+
+**Resposta:**
+```json
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Estudar Flask",
+      "description": "Aprender sobre APIs REST com Flask",
+      "completed": false
+    }
+  ],
+  "total_tasks": 1
+}
+```
+
+### Buscar tarefa por ID
+```bash
+GET /tasks/1
 ```
 
 ### Atualizar uma tarefa
@@ -114,9 +154,34 @@ Content-Type: application/json
 
 {
   "title": "Estudar Flask - Concluído",
-  "done": true
+  "description": "Aprender sobre APIs REST com Flask",
+  "completed": true
 }
 ```
+
+**Resposta:**
+```json
+{
+  "message": "Tarefa atualizada com sucesso"
+}
+```
+
+### Deletar uma tarefa
+```bash
+DELETE /tasks/1
+```
+
+**Resposta:**
+```json
+{
+  "message": "Tarefa deletada com sucesso"
+}
+```
+
+## ⚠️ Observações
+
+- Os dados são armazenados em memória, portanto serão perdidos ao reiniciar a aplicação
+- Para persistência de dados, considere implementar um banco de dados (SQLite, PostgreSQL, etc.)
 
 ## 🤝 Contribuindo
 
