@@ -2,14 +2,14 @@
 
 ## 📝 Sobre o projeto
 
-Aplicação web simples de gerenciamento de tarefas (To-Do List) desenvolvida com **Flask** e **SQLAlchemy**. O projeto implementa as operações CRUD (Create, Read, Update, Delete) completas para gerenciar tarefas de forma eficiente através de uma interface web intuitiva.
+API REST de gerenciamento de tarefas (To-Do List) desenvolvida com **Flask** e **SQLAlchemy**. O projeto implementa as operações CRUD (Create, Read, Update, Delete) completas para gerenciar tarefas de forma eficiente através de endpoints REST.
 
 Ideal para aprendizado de desenvolvimento web com Python, demonstrando conceitos de:
 - Framework Flask
 - ORM com SQLAlchemy
 - Banco de dados SQLite
-- Templates HTML com Jinja2
-- Roteamento e métodos HTTP
+- APIs RESTful
+- Operações CRUD
 
 ## 🚀 Tecnologias utilizadas
 
@@ -17,8 +17,6 @@ Ideal para aprendizado de desenvolvimento web com Python, demonstrando conceitos
 - **Flask** - Framework web
 - **Flask-SQLAlchemy** - ORM para banco de dados
 - **SQLite** - Banco de dados
-- **HTML/CSS** - Interface do usuário
-- **Jinja2** - Template engine
 
 ## ⚙️ Como executar
 
@@ -51,7 +49,7 @@ source venv/bin/activate
 
 4. Instale as dependências:
 ```bash
-pip install flask flask-sqlalchemy
+pip install -r requirements.txt
 ```
 
 ### Executando a aplicação
@@ -59,24 +57,7 @@ pip install flask flask-sqlalchemy
 python app.py
 ```
 
-A aplicação estará disponível em: `http://localhost:5000`
-
-## 📁 Estrutura do projeto
-```
-task-flask-crudd/
-├── app.py                 # Aplicação principal Flask
-├── instance/
-│   └── tasks.db          # Banco de dados SQLite (gerado automaticamente)
-├── templates/
-│   ├── base.html         # Template base
-│   ├── index.html        # Página principal (lista de tarefas)
-│   ├── create.html       # Formulário de criação
-│   └── update.html       # Formulário de atualização
-├── static/
-│   └── css/
-│       └── style.css     # Estilos CSS
-└── README.md
-```
+A API estará disponível em: `http://localhost:5000`
 
 ## 🎯 Funcionalidades
 
@@ -97,14 +78,45 @@ task-flask-crudd/
 | description | Text | Descrição detalhada |
 | done | Boolean | Status de conclusão (padrão: False) |
 
-## 📸 Rotas da aplicação
+## 📸 Endpoints da API
 
-| Rota | Método | Descrição |
-|------|--------|-----------|
-| `/` | GET | Lista todas as tarefas |
-| `/create` | GET, POST | Cria uma nova tarefa |
-| `/update/<id>` | GET, POST | Atualiza uma tarefa existente |
-| `/delete/<id>` | POST | Exclui uma tarefa |
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/tasks` | Lista todas as tarefas |
+| GET | `/tasks/<id>` | Visualiza uma tarefa específica |
+| POST | `/tasks` | Cria uma nova tarefa |
+| PUT | `/tasks/<id>` | Atualiza uma tarefa existente |
+| DELETE | `/tasks/<id>` | Exclui uma tarefa |
+
+## 💡 Exemplos de uso
+
+### Criar uma tarefa
+```bash
+POST /tasks
+Content-Type: application/json
+
+{
+  "title": "Estudar Flask",
+  "description": "Aprender sobre APIs REST com Flask",
+  "done": false
+}
+```
+
+### Listar todas as tarefas
+```bash
+GET /tasks
+```
+
+### Atualizar uma tarefa
+```bash
+PUT /tasks/1
+Content-Type: application/json
+
+{
+  "title": "Estudar Flask - Concluído",
+  "done": true
+}
+```
 
 ## 🤝 Contribuindo
 
@@ -117,3 +129,4 @@ Este projeto está sob a licença MIT.
 ## 👩‍💻 Autora
 
 Desenvolvido por [Luisa Ferreira](https://github.com/luisaferreirass)
+```
